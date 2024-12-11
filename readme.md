@@ -1,4 +1,4 @@
-# scSGC
+<img width="857" alt="image" src="https://github.com/user-attachments/assets/ac6850fc-6a64-4041-a861-eb1847091355"># scSGC
 scSGC, a clustering model based on dual-channel cut-informed soft graph for scRNA-seq data. See details in our paper: "Soft Graph Clustering for single-cell Sequencing Data" published in XXXXXX（CCF-X）.
 （Accepted as a XXX paper for the research track at XXXXXX）
 
@@ -54,9 +54,10 @@ The final output reports the clustering performance, here is an example on Maaya
 
 Final: ACC= 0.9625, NMI= 0.9142, ARI= 0.9489
 
-The raw data used in this paper can be found:https://github.com/XPgogogo/scSGC/tree/master/datasets
+The raw data used in this paper can be found: https://github.com/XPgogogo/scSGC/tree/master/datasets
 
-![Uploading image.png…]()
+<img width="857" alt="image" src="https://github.com/user-attachments/assets/5400d16d-7f24-4790-8561-3af965d5c3b3">
+
 
 
 # Please cite our paper if you use this code or or the dataset we provide in your own work:
