@@ -13,7 +13,8 @@ To address these issues, scSGC introduces a Soft Graph Clustering framework comp
 Extensive experiments across 8 datasets demonstrate that scSGC significantly outperforms 11 state-of-the-art clustering models in terms of clustering accuracy, cell type annotation, and computational efficiency, highlighting its substantial potential to enhance scRNA-seq data analysis and advance understanding of cellular heterogeneity.
 In summary, scSGC represents a major enhancement over existing methods, addressing critical challenges in scRNA-seq clustering while expanding on our earlier work.
 
-![Alt text](scSGC/figure/Overview.png)
+<img width="1203" alt="image" src="https://github.com/user-attachments/assets/90f8204e-ce23-4491-b57f-32873e417805">
+
 
 Fig.1(a) depicts a hard graph GNN-based framework for scRNA-seq clustering, while Fig.1(b) illustrates the framework of our proposed method, scSGC.
 In contrast, scSGC offers two key advantages: (i) It tightly integrates two key modules within the graph-based scRNA-seq clustering framework, i.e., the feature autoencoder and the graph autoencoder, allowing both modules to optimize the final embedding collaboratively; (ii) By employing a soft graph construction strategy, it eliminates reliance on hard graph structures, enabling more effective capture of intracellular structural information and fully utilizing continuous similarities between cells.
@@ -55,7 +56,8 @@ Final: ACC= 0.9625, NMI= 0.9142, ARI= 0.9489
 
 The raw data used in this paper can be found:https://github.com/XPgogogo/scSGC/tree/master/datasets
 
-![Alt text](scSGC/figure/Clustering_performances.png)
+![Uploading image.png…]()
+
 
 # Please cite our paper if you use this code or or the dataset we provide in your own work:
 
