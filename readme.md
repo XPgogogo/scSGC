@@ -35,7 +35,7 @@ Moreover, future work will focus on improving the model's scalability and enhanc
 
 # Run Example
 ```shell
-python train_scSGC.py --dataname 'Maayan_Human_Pancreas_cell_1' --num_class 14 --epochs 200 --foldername 'logger_folder' --gpu 0 --learning_rate 1e-3 --weight_decay 5e-4 --balancer 0.7 --factor_ort 30 --factor_KL 1e-3 --factor_corvar 1 --factor_construct 0.23 --factor_zinb 25 --highly_genes 2000
+python train_new.py --dataname 'Maayan_Human_Pancreas_cell_1' --num_class 14 --epochs 200 --foldername 'logger_folder' --gpu 0 --learning_rate 1e-3 --weight_decay 5e-4 --balancer 0.7 --factor_ort 30 --factor_KL 1e-3 --factor_corvar 1 --factor_construct 0.23 --factor_zinb 25 --highly_genes 2000
 ```
 Here, we give the hyperparameters used for the Maayan_Human_Pancreas_cell_1 dataset. The hyperparameters for the rest of the datasets are found in the file train_scSGC.py.
 
