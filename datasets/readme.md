@@ -1,27 +1,45 @@
-# scCDCG
-scCDCG, a clustering model based on deep cut-informed graph for scRNA-seq data. See details in our paper: "scCDCG: Efficient Deep Structural Clustering for single-cell RNA-seq via Deep Cut-informed Graph Embedding" published in DASFAA2024（CCF-B）.
+<img width="594" alt="image" src="https://github.com/user-attachments/assets/18d3fd2e-3c1f-450e-b479-0a7a569b3b68" /># scSGC
+scSGC, a Soft Graph Clustering for single-cell RNA sequencing data, aims to more accurately characterize continuous similarities among cells through non-binary edge weights, thereby mitigating the limitations of rigid data structures. 
+See details in our paper: "Soft Graph Clustering for single-cell RNA Sequencing Data" published in XXX（CCF-X）.
 （Accepted as a long paper for the research track at DASFAA 2024）
 
-(arXiv: https://arxiv.org/abs/2404.06167)
+(arXiv: XXX)
 
-（DOI：10.48550/arXiv.2404.06167 ）
+（DOI：XXX ）
+
+# Background
+Clustering analysis is fundamental in single-cell RNA sequencing (scRNA-seq) data analysis for elucidating cellular heterogeneity and diversity. 
+Recent graph-based scRNA-seq clustering methods, particularly graph neural networks (GNNs), have significantly improved in tackling the challenges of high-dimension, high-sparsity, and frequent dropout events that lead to ambiguous cell population boundaries. 
+However, the GNN-based method is intended for general graph encoding and faces challenges when applied to scRNA-seq data due to the following reasons: 
+(i) GNN-based methods typically construct hard graphs from similarity matrices by applying a threshold that overly simplifies intercellular relationships into binary edges (0 or 1), which restricts the capture of continuous similarity features among cells and leads to significant information loss. 
+(ii) Hard graphs derived from scRNA-seq data, which often exhibit significant inter-cluster connections, present challenges for GNN-based methods that rely heavily on underlying graph structures and typically generate similar representations for neighboring nodes, thereby leading to erroneous message propagation and biased clustering outcomes. 
 
 
 # Overview
-Single-cell RNA sequencing (scRNA-seq) is essential for unraveling cellular heterogeneity and diversity, offering invaluable insights for bioinformatics advancements. Despite its potential, traditional clustering methods in scRNA-seq data analysis often neglect the structural information embedded in gene expression profiles, crucial for understanding cellular correlations and dependencies. Existing strategies, including graph neural networks, face challenges in handling the inefficiency due to scRNA-seq data's intrinsic high-dimension and high-sparsity. Addressing these limitations, we introduce scCDCG (single-cell RNA-seq Clustering via Deep Cut-informed Graph), a novel framework designed for efficient and accurate clustering of scRNA-seq data that simultaneously utilizes intercellular high-order structural information. scCDCG comprises three main components: (i) A graph embedding module utilizing deep cut-informed techniques, which effectively captures intercellular high-order structural information, overcoming the over-smoothing and inefficiency issues prevalent in prior graph neural network methods. (ii) A self-supervised learning module guided by optimal transport, tailored to accommodate the unique complexities of scRNA-seq data, specifically its high-dimension and high-sparsity. (iii) An autoencoder-based feature learning module that simplifies model complexity through effective dimension reduction and feature extraction. Our extensive experiments on 6 datasets demonstrate scCDCG's superior performance and efficiency compared to 7 established models, underscoring scCDCG's potential as a transformative tool in scRNA-seq data analysis.
+To tackle these challenges, we introduce scSGC, a Soft Graph Clustering for single-cell RNA sequencing data, which aims to more accurately characterize continuous similarities among cells through non-binary edge weights, thereby mitigating the limitations of rigid data structures. 
+The scSGC framework comprises three core components: 
+(i) a zero-inflated negative binomial (ZINB)-based feature autoencoder designed to effectively handle the sparsity and dropout issues in scRNA-seq data; 
+(ii) a dual-channel cut-informed soft graph embedding module, constructed through deep graph-cut information, which captures continuous similarities between cells while simultaneously preserving scRNA-seq data structures; 
+and (iii) an optimal transport-based clustering optimization module, achieving optimal delineation of cell populations while maintaining high biological relevance.
 
-<img width="900" alt="image" src="https://github.com/XPgogogo/scCDCG/assets/89444373/26154573-db73-4929-b614-0db799ef23da">
+<img width="581" alt="image" src="https://github.com/user-attachments/assets/e8765bcb-048b-418e-a2be-e9e7f893f279" />
 
-We propose scCDCG, a deep cut-informed graph model-based single cell cluster-ing method (see Fig. 1 for its architecture), which includes (i) an autoencoder-based feature learning module for learning gene expression embeddings, (ii) agraph embedding module based on deep cut-informed techniques for capturingintercellular high-order structural information, and (iii) a self-supervision learn-ing module via optimal transport for generating clustering assignments.
+# Conclusion
+By integrating dual-channel cut-informed soft graph representation learning, a ZINB-based feature autoencoder, and optimal transport-driven clustering optimization, scSGC effectively overcomes the challenges of traditional hard graph constructions. Extensive experiments across 8 datasets demonstrate that scSGC outperforms 11 state-of-the-art clustering models in clustering accuracy, cell type annotation, and computational efficiency. These results highlight its substantial potential to advance scRNA-seq data analysis and deepen our understanding of cellular heterogeneity.
 
-In conclusion, our study introduces scCDCG, an innovative framework for the efficient and accurate clustering of single-cell RNA sequencing (scRNA-seq) data. scCDCG successfully navigates the challenges of high-dimension and high-sparsity through a synergistic combination of a graph embedding module with deep cut-informed techniques, a self-supervised learning module guided by optimal transport, and an autoencoder-based feature learning module. Our extensive evaluations on six datasets confirm scCDCG's superior performance over seven established models, marking it as a transformative tool for bioinformatics and cellular heterogeneity analysis. Looking forward, we aim to extend scCDCG's capabilities to integrate multi-omics data, enhancing its applicability in more complex biological contexts. Additionally, further exploration into the interpretability of the clustering results generated by scCDCG will be crucial for providing deeper biological insights and facilitating its adoption in clinical research settings. This future work will continue to expand the frontiers of scRNA-seq data analysis and its impact on understanding the complexities of cellular systems.
+In conclusion, we propose scSGC, an efficient and accurate framework for clustering single-cell RNA sequencing data. 
+By integrating dual-channel soft graph representation learning with deep cut-informed techniques and incorporating ZINB-based feature autoencoder and optimal transport-driven clustering optimization, scSGC effectively addresses the critical challenges associated with traditional hard graph constructions, improving clustering accuracy while preserving biological relevance. 
+Extensive experiments across eight datasets demonstrate that scSGC significantly outperforms eleven state-of-the-art clustering models in terms of clustering accuracy, cell type annotation, and computational efficiency, highlighting its significant advantages in single-cell bioinformatics and cellular heterogeneity analysis.
+
+Looking ahead, we plan to enhance scSGC by integrating advanced large language models and extending its applicability to diverse multi-omics data types, such as spatial transcriptomics, which offer valuable contextual and spatial information for understanding complex biological systems.
+Moreover, future work will focus on improving the model's scalability and enhancing the interpretability of clustering results to support more intricate biological research and analyses, thereby opening new pathways for understanding cellular systems and promoting personalized medicine.
 
 
 # Run Example
 ```shell
-python train_scCDCG.py --dataname 'Meuro_human_Pancreas_cell' --num_class 9 --epochs 200 --foldername 'logger_folder' --gpu 0 --learning_rate 5e-3 --weight_decay 5e-3 --balancer 0.42 --factor_ort 0.87 --factor_KL 0.45 --factor_corvar 0.2 --factor_construct 0.93 --alpha_pre 0.8
+python train_scSGC.py --dataname 'Maayan_Mouse_Pancreas_cell_1' --num_class 13 --epochs 200 --foldername 'logger_folder' --gpu 0 --learning_rate 5e-3 --weight_decay 5e-3 --balancer 0.5 --factor_ort 25 --factor_KL 1e-3 --factor_corvar 1 --factor_construct 0.23 --factor_zinb 20 --highly_genes 1500
 ```
-Here, we give the hyperparameters used for the Meuro_human_Pancreas_cell dataset. The hyperparameters for the rest of the datasets are found in the file train_scCDCG.py.
+Here, we give the hyperparameters used for the Maayan_Mouse_Pancreas_cell_1 dataset. The hyperparameters for the rest of the datasets are found in the file train_scSGC.py.
 
 If you want to replicate our experimental results, please use the hyperparameters we provided.
 
@@ -29,7 +47,7 @@ Please contact us if you encounter problems during the replication process.
 
 
 # Requirements
-We implement scCDCG in Python 3.7 based on PyTorch (version 1.12+cu113).
+We implement scSGC in Python 3.7 based on PyTorch (version 1.12+cu113).
 
 ```shell
 Keras --- 2.4.3
@@ -45,26 +63,22 @@ Please note that if using different versions, the results reported in our paper 
 Setting data_file to the destination to the data (stored in h5 format, with two components X and Y, where X is the cell by gene count matrix and Y is the true labels), n_clusters to the number of clusters.
 
 In order to ensure the accuracy of the experimental results, we conducted more than 10 times runs on all the datasets and reported the mean and variance of these running results, reducing the result bias caused by randomness and variability, so as to obtain more reliable and stable results. Hyperparameter settings for all datasets can be found in the code.
-The final output reports the clustering performance, here is an example on Meuro_human_Pancreas_cell scRNA-seq data:
+The final output reports the clustering performance, here is an example on Maayan_Mouse_Pancreas_cell_1 data:
 
-Final: ACC= 0.9265, NMI= 0.8681, ARI= 0.9137
+Final: ACC= 0.9124, NMI= 0.8578, ARI= 0.9163
 
-The raw data used in this paper can be found:https://github.com/XPgogogo/scCDCG/tree/master/datasets
+The raw data used in this paper can be found:https://github.com/XPgogogo/scSGC/tree/master/datasets
 
 
-<img width="640" alt="image" src="https://github.com/XPgogogo/scCDCG/assets/89444373/8e5ad929-c452-4088-bd66-a195d1f1269e">
+<img width="594" alt="image" src="https://github.com/user-attachments/assets/93974574-fa69-474f-968f-f5f2d0b5ea08" />
+
 
 
 
 # Please cite our paper if you use this code or or the dataset we provide in your own work:
 
 ```
-@article{xu2024sccdcg,
-  title={scCDCG: Efficient Deep Structural Clustering for single-cell RNA-seq via Deep Cut-informed Graph Embedding},
-  author={Xu, Ping and Ning, Zhiyuan and Xiao, Meng and Feng, Guihai and Li, Xin and Zhou, Yuanchun and Wang, Pengfei},
-  journal={arXiv preprint arXiv:2404.06167},
-  year={2024}
-}
+XXX
 ```
 
 # Contact
