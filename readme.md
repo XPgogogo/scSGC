@@ -1,7 +1,9 @@
+# scSGC 
+
 scSGC, a clustering model based on dual-channel cut-informed soft graph for scRNA-seq data. See details in our paper: "Soft Graph Clustering for single-cell Sequencing Data" published in XXXXXX（CCF-X）.
 （Accepted as a XXX paper for the research track at XXXXXX）
 
-(arXiv: https:    )
+(arXiv: https://    )
 
 （DOI：      ）
 
@@ -20,6 +22,15 @@ In contrast, scSGC offers two key advantages: (i) It tightly integrates two key 
 Specifically, our proposed method, scSGC, comprises three key modules: (i) ZINB-based feature autoencoder, which employs a ZINB model to characterize scRNA-seq data specifically to address high sparsity and dropout rates in gene expression data; (ii) Cut-informed soft graph modeling (see Fig.1(c) for its architecture), leverages dual-channel cut-informed soft graph construction to generate consistent and optimized cellular representations, facilitating smoother capture of intercellular continuous structural information; (iii) Optimization via optimal transport, utilizing optimal transport theory, achieving optimal partitioning of cell populations at minimal transport cost and ensuring stable clustering results within complex data structures. 
 
 In scSGC, we first model the raw scRNA-seq data using a ZINB autoencoder to generate robust cellular representations. Then, two soft graphs are constructed using the input data, and their corresponding laplacian matrices are computed. These matrices undergo a minimum jointly normalized cut through a graph-cut strategy to optimize the representation of cell-cell relationships. Finally, an optimal transport-based self-supervised learning approach is employed to refine the clustering, ensuring accurate partitioning of cell populations in high-dimensional and high-sparse data. 
+
+
+# Conclusion
+In conclusion, we propose scSGC, an efficient and accurate framework for clustering single-cell RNA sequencing data. 
+By integrating dual-channel soft graph representation learning with deep cut-informed techniques and incorporating ZINB-based feature autoencoder and optimal transport-driven clustering optimization, scSGC effectively addresses the critical challenges associated with traditional hard graph constructions, improving clustering accuracy while preserving biological relevance. 
+Extensive experiments across eight datasets demonstrate that scSGC significantly outperforms eleven state-of-the-art clustering models in terms of clustering accuracy, cell type annotation, and computational efficiency, highlighting its significant advantages in single-cell bioinformatics and cellular heterogeneity analysis.
+
+Looking ahead, we plan to enhance scSGC by integrating advanced large language models and extending its applicability to diverse multi-omics data types, such as spatial transcriptomics, which offer valuable contextual and spatial information for understanding complex biological systems.
+Moreover, future work will focus on improving the model's scalability and enhancing the interpretability of clustering results to support more intricate biological research and analyses, thereby opening new pathways for understanding cellular systems and promoting personalized medicine.
 
 
 # Run Example
@@ -49,7 +60,7 @@ Please note that if using different versions, the results reported in our paper 
 Setting data_file to the destination to the data (stored in h5 format, with two components X and Y, where X is the cell by gene count matrix and Y is the true labels), n_clusters to the number of clusters.
 
 In order to ensure the accuracy of the experimental results, we conducted more than 10 times runs on all the datasets and reported the mean and variance of these running results, reducing the result bias caused by randomness and variability, so as to obtain more reliable and stable results. Hyperparameter settings for all datasets can be found in the code.
-The final output reports the clustering performance, here is an example on Maayan_Human_Pancreas_cell_1 scRNA-seq data:
+The final output reports the clustering performance, here is an example on Maayan_Human_Pancreas_cell_1 data:
 
 Final: ACC= 0.9625, NMI= 0.9142, ARI= 0.9489
 
