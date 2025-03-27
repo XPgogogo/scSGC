@@ -1,4 +1,4 @@
-<img width="594" alt="image" src="https://github.com/user-attachments/assets/18d3fd2e-3c1f-450e-b479-0a7a569b3b68" /># scSGC
+# scSGC
 scSGC, a Soft Graph Clustering for single-cell RNA sequencing data, aims to more accurately characterize continuous similarities among cells through non-binary edge weights, thereby mitigating the limitations of rigid data structures. 
 See details in our paper: "Soft Graph Clustering for single-cell RNA Sequencing Data" published in XXX（CCF-X）.
 （Accepted as a long paper for the research track at DASFAA 2024）
