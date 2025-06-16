@@ -89,118 +89,98 @@ if __name__ == "__main__":
         os.makedirs('log/{}/'.format(args.foldername))
 
     if args.dataname == 'Maayan_Mouse_Pancreas_cell_1':
-        # seed=3407,epoch=200,machine=17
         args.learning_rate = 1e-3
         args.weight_decay = 5e-3
         args.balancer = 0.5
         args.factor_ort =20
         args.factor_KL = 5e-3
         args.factor_corvar = 1
-        args.factor_construct = 0.23
         args.factor_zinb = 20
         args.highly_genes = 1500
 
     if args.dataname == 'Maayan_Mouse_Pancreas_cell_2':
-        # seed=296,epoch=100,machine=38
         args.learning_rate = 1e-3
         args.weight_decay = 1e-3
         args.balancer = 0.7
         args.factor_ort =25
         args.factor_KL = 1e-3
         args.factor_corvar = 1
-        args.factor_construct = 0.23
         args.factor_zinb = 25
         args.highly_genes = 1500
 
     if args.dataname == 'Maayan_Human_Pancreas_cell_2':
-        # seed=3407,epoch=50,machine=38
         args.learning_rate = 1e-3
         args.weight_decay = 5e-4
         args.balancer = 0.7
         args.factor_ort =10
         args.factor_KL = 1e-3
         args.factor_corvar = 1
-        args.factor_construct = 0.23
         args.factor_zinb = 25
         args.highly_genes = 2000
 
     if args.dataname == 'Maayan_Human_Pancreas_cell_1':
-        # seed=3407,epoch=150,machine=38
         args.learning_rate = 1e-3
         args.weight_decay = 5e-4
         args.balancer = 0.7
         args.factor_ort =30
         args.factor_KL = 1e-3
         args.factor_corvar = 1
-        args.factor_construct = 0.23
         args.factor_zinb = 25
         args.highly_genes = 2000
 
     if args.dataname == 'Meuro_human_Pancreas_cell':
-        # seed=233,epoch=50,machine=38
         args.learning_rate = 1e-3
         args.weight_decay = 5e-3
         args.balancer = 0.5
         args.factor_ort =10
         args.factor_KL = 1e-3
         args.factor_corvar = 1
-        args.factor_construct = 0.23
         args.factor_zinb = 100
         args.highly_genes = 2000
 
     if args.dataname == 'Xiaoping_mouse_bladder_cell':
-        # seed=3407,epoch=200
         args.learning_rate = 1e-3
         args.weight_decay = 5e-3
         args.balancer = 0.5
         args.factor_ort =10
         args.factor_KL = 1e-3
         args.factor_corvar = 1
-        args.factor_construct = 0.23
         args.factor_zinb = 50
         args.highly_genes = 2000
     if args.dataname == 'Maayan_Human_Pancreas_cell_3':
-        # seed=2021,epoch=200,machine=17
         args.learning_rate = 1e-3
         args.weight_decay = 5e-4
         args.balancer = 0.1
         args.factor_ort =30
         args.factor_KL = 1e-3
         args.factor_corvar = 1
-        args.factor_construct = 0.23
         args.factor_zinb = 25
         args.highly_genes = 2000
     if args.dataname == 'Junyue_worm_neuron_cell':
-        # seed=3407,epoch=200
         args.learning_rate = 5e-4
         args.weight_decay = 1e-3
         args.balancer = 0.7
         args.factor_ort = 0.95
         args.factor_KL = 0.48
         args.factor_corvar = 0.12
-        args.factor_construct = 0.6
         args.factor_zinb = 0.1
         args.highly_genes = 1500
     if args.dataname == 'Grace_CITE_CBMC_counts_top2000':
-        # seed=3407,epoch=200,machine=38
         args.learning_rate = 1e-3
         args.weight_decay = 5e-3
         args.balancer = 0.7
         args.factor_ort =10
         args.factor_KL = 1e-3
         args.factor_corvar = 1
-        args.factor_construct = 0.23
         args.factor_zinb = 50
         args.highly_genes = 1500
     if args.dataname == 'Sonya_HumanLiver_counts_top5000':
-        # seed=2486,epoch=200,machine=38
         args.learning_rate = 1e-3
         args.weight_decay = 5e-3
         args.balancer = 0.7
         args.factor_ort =15
         args.factor_KL = 1e-3
         args.factor_corvar = 0
-        args.factor_construct = 0.23
         args.factor_zinb = 50
         args.highly_genes = 1500
 
@@ -246,34 +226,6 @@ if __name__ == "__main__":
     sf = adata.obs.size_factors
     Y = np.array(adata.obs["Group"])
 
-    # high_variable = np.array(adata.var.highly_variable.index, dtype=np.int) #高可变的500个基因对应的索引
-    # count_X = count_X[:, high_variable] # 抽离出高表达的500个基因的全基因组表达数据
-
-
-    #############
-    # Model Input：高表达基因矩阵；sf(实验证明这个的效果更好)
-    # X = torch.from_numpy(X)
-    # X_ = torch.nn.functional.normalize(x, p=2, dim=1)   
-    ############
-    # # # # Model Input：未做任何处理的基因表达矩阵；sf
-
-    # X = torch.from_numpy(x.cpu().numpy() )
-    # X_ = torch.nn.functional.normalize(x, p=2, dim=1)   
-
-    
-    # # 构图
-    # # heat p cos ncos
-    # adj_1 = construct_graph(X_, Y, "cos", topk=10)
-    # adj_norm_1 = normalize_adj(adj_1, self_loop=True, symmetry=True) #包含symmetric+self-loop
-
-    # adj_2 = construct_graph(X_, Y, "ncos", topk=10)
-    # adj_norm_2 = normalize_adj(adj_norm_1, self_loop=True, symmetry=True) #包含symmetric+self-loop
-
-    # L_1 = get_laplace_matrix(adj_norm_1)
-    # L_2 = get_laplace_matrix(adj_norm_2)
-    # if args.show_details  is True:
-    #     dataset_show_details(args.dataname,x_,y,adj_1)
-
     # # 相似度矩阵
     X = torch.from_numpy(X)
     X_ = torch.nn.functional.normalize(X, p=2, dim=1)  
@@ -286,8 +238,6 @@ if __name__ == "__main__":
     L_2 = get_laplace_matrix(adj_2)
 
 
-    # for seed in [2021,2022,2050,3047,3041]:
-    # for seed in [3407,3041,2021,2022,2050,3047]:
     for seed in [3407]:
     # for seed in [random.randint(0, 5000) for  i in range(100)]:
         logger.info('Seed {}'.format(seed))
@@ -305,20 +255,14 @@ if __name__ == "__main__":
         acc_max = 0
         for epoch in range(1, args.epochs+1):
 
-            # h, x_hat = Model.forward(
-            # x_.cuda())
+
             h,x_hat,meanbatch, dispbatch, pibatch = Model.forward(X.cuda())
             z = torch.nn.functional.normalize(h, p=2, dim=0)
-            # adj_pred = torch.mm(z, z.T)
 
-            # loss_x = torch.nn.functional.mse_loss(x_hat, x.cuda()) # MSE重构损失
             loss_corvariates = -torch.mm(torch.mm(z.T, (args.balancer * L_1.cuda() + (1-args.balancer) * L_2.cuda())),z).trace()/len(z.T)
             loss_ort =  torch.nn.functional.mse_loss(torch.mm(z.T,z).view(-1).cuda(),torch.eye(len(z.T)).view(-1).cuda())
-            # loss_zinb = zinb_loss(x_,meanbatch, dispbatch, pibatch, sf)
             loss_zinb = zinb_loss(X.cuda(), meanbatch.cuda(), dispbatch.cuda(), pibatch.cuda(), sf, device='cuda')
 
-            # loss = args.factor_construct * loss_x + args.factor_ort * loss_ort + args.factor_corvar * loss_corvariates
-            # loss = args.factor_ort * loss_ort + args.factor_corvar * loss_corvariates #没有解码器的重构损失+ZINBloss
             loss = args.factor_ort * loss_ort + args.factor_corvar * loss_corvariates + args.factor_zinb * loss_zinb
 
 
@@ -368,13 +312,9 @@ if __name__ == "__main__":
             z , x_hat, meanbatch, dispbatch, pibatch = Model.forward(X.cuda())
             z = torch.nn.functional.normalize(z, p=2, dim=0)
             centers = centers.detach()
-            # adj_pred = torch.mm(z, z.T)
-            # loss_x = torch.nn.functional.mse_loss(x_hat, X_.cuda()) # MSE重构损失
             loss_corvariates = -torch.mm(torch.mm(z.T, ( args.balancer * L_1.cuda() + (1-args.balancer) * L_2.cuda())),z).trace()/len(z.T)
             loss_ort = torch.nn.functional.mse_loss(torch.mm(z.T,z).view(-1).cuda(),torch.eye(len(z.T)).view(-1).cuda())
-            # loss_zinb = zinb_loss(x_,meanbatch, dispbatch, pibatch, sf)
             loss_zinb = zinb_loss(X.cuda(), meanbatch.cuda(), dispbatch.cuda(), pibatch.cuda(), sf, device='cuda')
-            # loss_adj_graph = torch.nn.functional.mse_loss(adj_pred.view(-1), adj_norm.cuda().view(-1))
        
             #### DEC 
             class_assign_model = ClusterAssignment(args.num_class, len(z.T), 1, centers).cuda()
@@ -397,12 +337,7 @@ if __name__ == "__main__":
 
             KL_loss_function = nn.KLDivLoss(reduction='sum') 
             loss_KL = KL_loss_function(temp_class.cuda(), p_distribution.cuda()) / temp_class.shape[0]
-            
-            # KL_loss_function = nn.KLDivLoss(reduction='mean')
-            # loss_KL = KL_loss_function(temp_class.cuda(), p_distribution.cuda())
 
-            # loss = args.factor_construct * loss_x + args.factor_ort * loss_ort + args.factor_corvar * loss_corvariates + args.factor_KL * loss_KL
-            # loss = args.factor_corvar * loss_corvariates + args.factor_ort * loss_ort + args.factor_KL * loss_KL +
             loss = args.factor_corvar * loss_corvariates + args.factor_ort * loss_ort + args.factor_KL * loss_KL + args.factor_zinb * loss_zinb
 
             optimizer.zero_grad()
@@ -411,7 +346,6 @@ if __name__ == "__main__":
             
             with torch.no_grad():
                 kmeans = KMeans(n_clusters=args.num_class, random_state=2021, n_init=20).fit(z.cpu().numpy())
-                # kmeans = KMeans(n_clusters=args.num_class, random_state=2021, n_init=20).fit(np.nan_to_num(z.cpu().numpy()))
                 acc, nmi, ari, f1_macro = evaluation(y, kmeans.labels_)
                 if acc_max < acc:
                     acc_max, nmi_max, ari_max, f1_macro_max = acc, nmi, ari, f1_macro
@@ -435,3 +369,120 @@ if __name__ == "__main__":
 
 
 
+
+
+    # if args.dataname == 'Maayan_Mouse_Pancreas_cell_1':
+    #     # seed=3407,epoch=200,machine=17
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 5e-3
+    #     args.balancer = 0.5
+    #     args.factor_ort =20
+    #     args.factor_KL = 5e-3
+    #     args.factor_corvar = 1
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 20
+    #     args.highly_genes = 1500
+
+    # if args.dataname == 'Maayan_Mouse_Pancreas_cell_2':
+    #     # seed=296,epoch=100,machine=38
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 1e-3
+    #     args.balancer = 0.7
+    #     args.factor_ort =25
+    #     args.factor_KL = 1e-3
+    #     args.factor_corvar = 1
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 25
+    #     args.highly_genes = 1500
+
+    # if args.dataname == 'Maayan_Human_Pancreas_cell_2':
+    #     # seed=3407,epoch=50,machine=38
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 5e-4
+    #     args.balancer = 0.7
+    #     args.factor_ort =10
+    #     args.factor_KL = 1e-3
+    #     args.factor_corvar = 1
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 25
+    #     args.highly_genes = 2000
+
+    # if args.dataname == 'Maayan_Human_Pancreas_cell_1':
+    #     # seed=3407,epoch=150,machine=38
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 5e-4
+    #     args.balancer = 0.7
+    #     args.factor_ort =30
+    #     args.factor_KL = 1e-3
+    #     args.factor_corvar = 1
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 25
+    #     args.highly_genes = 2000
+
+    # if args.dataname == 'Meuro_human_Pancreas_cell':
+    #     # seed=233,epoch=50,machine=38
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 5e-3
+    #     args.balancer = 0.5
+    #     args.factor_ort =10
+    #     args.factor_KL = 1e-3
+    #     args.factor_corvar = 1
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 100
+    #     args.highly_genes = 2000
+
+    # if args.dataname == 'Xiaoping_mouse_bladder_cell':
+    #     # seed=3407,epoch=200
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 5e-3
+    #     args.balancer = 0.5
+    #     args.factor_ort =10
+    #     args.factor_KL = 1e-3
+    #     args.factor_corvar = 1
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 50
+    #     args.highly_genes = 2000
+    # if args.dataname == 'Maayan_Human_Pancreas_cell_3':
+    #     # seed=2021,epoch=200,machine=17
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 5e-4
+    #     args.balancer = 0.1
+    #     args.factor_ort =30
+    #     args.factor_KL = 1e-3
+    #     args.factor_corvar = 1
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 25
+    #     args.highly_genes = 2000
+    # if args.dataname == 'Junyue_worm_neuron_cell':
+    #     # seed=3407,epoch=200
+    #     args.learning_rate = 5e-4
+    #     args.weight_decay = 1e-3
+    #     args.balancer = 0.7
+    #     args.factor_ort = 0.95
+    #     args.factor_KL = 0.48
+    #     args.factor_corvar = 0.12
+    #     args.factor_construct = 0.6
+    #     args.factor_zinb = 0.1
+    #     args.highly_genes = 1500
+    # if args.dataname == 'Grace_CITE_CBMC_counts_top2000':
+    #     # seed=3407,epoch=200,machine=38
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 5e-3
+    #     args.balancer = 0.7
+    #     args.factor_ort =10
+    #     args.factor_KL = 1e-3
+    #     args.factor_corvar = 1
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 50
+    #     args.highly_genes = 1500
+    # if args.dataname == 'Sonya_HumanLiver_counts_top5000':
+    #     # seed=2486,epoch=200,machine=38
+    #     args.learning_rate = 1e-3
+    #     args.weight_decay = 5e-3
+    #     args.balancer = 0.7
+    #     args.factor_ort =15
+    #     args.factor_KL = 1e-3
+    #     args.factor_corvar = 0
+    #     args.factor_construct = 0.23
+    #     args.factor_zinb = 50
+    #     args.highly_genes = 1500
