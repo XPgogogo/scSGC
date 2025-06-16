@@ -1,9 +1,8 @@
-# scSGC 
-
-scSGC, a clustering model based on dual-channel cut-informed soft graph for scRNA-seq data. See details in our paper: "Soft Graph Clustering for single-cell Sequencing Data" published in XXXXXX（CCF-X）.
+# scSGC
+scSGC, a clustering model based on dual-channel cut-informed soft graph for scRNA-seq data. See details in our paper: " ini" published in XXXXXX（CCF-X）.
 （Accepted as a XXX paper for the research track at XXXXXX）
 
-(arXiv: https://    )
+(arXiv: https:    )
 
 （DOI：      ）
 
@@ -14,8 +13,7 @@ To address these issues, scSGC introduces a Soft Graph Clustering framework comp
 Extensive experiments across 8 datasets demonstrate that scSGC significantly outperforms 11 state-of-the-art clustering models in terms of clustering accuracy, cell type annotation, and computational efficiency, highlighting its substantial potential to enhance scRNA-seq data analysis and advance understanding of cellular heterogeneity.
 In summary, scSGC represents a major enhancement over existing methods, addressing critical challenges in scRNA-seq clustering while expanding on our earlier work.
 
-<img width="1203" alt="image" src="https://github.com/user-attachments/assets/90f8204e-ce23-4491-b57f-32873e417805">
-
+![Alt text](scSGC/figure/Overview.png)
 
 Fig.1(a) depicts a hard graph GNN-based framework for scRNA-seq clustering, while Fig.1(b) illustrates the framework of our proposed method, scSGC.
 In contrast, scSGC offers two key advantages: (i) It tightly integrates two key modules within the graph-based scRNA-seq clustering framework, i.e., the feature autoencoder and the graph autoencoder, allowing both modules to optimize the final embedding collaboratively; (ii) By employing a soft graph construction strategy, it eliminates reliance on hard graph structures, enabling more effective capture of intracellular structural information and fully utilizing continuous similarities between cells.
@@ -24,18 +22,9 @@ Specifically, our proposed method, scSGC, comprises three key modules: (i) ZINB-
 In scSGC, we first model the raw scRNA-seq data using a ZINB autoencoder to generate robust cellular representations. Then, two soft graphs are constructed using the input data, and their corresponding laplacian matrices are computed. These matrices undergo a minimum jointly normalized cut through a graph-cut strategy to optimize the representation of cell-cell relationships. Finally, an optimal transport-based self-supervised learning approach is employed to refine the clustering, ensuring accurate partitioning of cell populations in high-dimensional and high-sparse data. 
 
 
-# Conclusion
-In conclusion, we propose scSGC, an efficient and accurate framework for clustering single-cell RNA sequencing data. 
-By integrating dual-channel soft graph representation learning with deep cut-informed techniques and incorporating ZINB-based feature autoencoder and optimal transport-driven clustering optimization, scSGC effectively addresses the critical challenges associated with traditional hard graph constructions, improving clustering accuracy while preserving biological relevance. 
-Extensive experiments across eight datasets demonstrate that scSGC significantly outperforms eleven state-of-the-art clustering models in terms of clustering accuracy, cell type annotation, and computational efficiency, highlighting its significant advantages in single-cell bioinformatics and cellular heterogeneity analysis.
-
-Looking ahead, we plan to enhance scSGC by integrating advanced large language models and extending its applicability to diverse multi-omics data types, such as spatial transcriptomics, which offer valuable contextual and spatial information for understanding complex biological systems.
-Moreover, future work will focus on improving the model's scalability and enhancing the interpretability of clustering results to support more intricate biological research and analyses, thereby opening new pathways for understanding cellular systems and promoting personalized medicine.
-
-
 # Run Example
 ```shell
-python train_new.py --dataname 'Maayan_Human_Pancreas_cell_1' --num_class 14 --epochs 200 --foldername 'logger_folder' --gpu 0 --learning_rate 1e-3 --weight_decay 5e-4 --balancer 0.7 --factor_ort 30 --factor_KL 1e-3 --factor_corvar 1 --factor_construct 0.23 --factor_zinb 25 --highly_genes 2000
+python train_scSGC.py --dataname 'Maayan_Human_Pancreas_cell_1' --num_class 14 --epochs 200 --foldername 'logger_folder' --gpu 0 --learning_rate 1e-3 --weight_decay 5e-4 --balancer 0.7 --factor_ort 30 --factor_KL 1e-3 --factor_corvar 1 --factor_zinb 25 --highly_genes 2000
 ```
 Here, we give the hyperparameters used for the Maayan_Human_Pancreas_cell_1 dataset. The hyperparameters for the rest of the datasets are found in the file train_scSGC.py.
 
@@ -60,20 +49,18 @@ Please note that if using different versions, the results reported in our paper 
 Setting data_file to the destination to the data (stored in h5 format, with two components X and Y, where X is the cell by gene count matrix and Y is the true labels), n_clusters to the number of clusters.
 
 In order to ensure the accuracy of the experimental results, we conducted more than 10 times runs on all the datasets and reported the mean and variance of these running results, reducing the result bias caused by randomness and variability, so as to obtain more reliable and stable results. Hyperparameter settings for all datasets can be found in the code.
-The final output reports the clustering performance, here is an example on Maayan_Human_Pancreas_cell_1 data:
+The final output reports the clustering performance, here is an example on Maayan_Human_Pancreas_cell_1 scRNA-seq data:
 
 Final: ACC= 0.9625, NMI= 0.9142, ARI= 0.9489
 
-The raw data used in this paper can be found: https://github.com/XPgogogo/scSGC/tree/master/datasets
+The raw data used in this paper can be found:https://github.com/XPgogogo/scSGC/tree/master/datasets
 
-<img width="857" alt="image" src="https://github.com/user-attachments/assets/5400d16d-7f24-4790-8561-3af965d5c3b3">
-
-
+![Alt text](scSGC/figure/Clustering_performances.png)
 
 # Please cite our paper if you use this code or or the dataset we provide in your own work:
 
 ```
-@article{xu2024sccdcg,
+@article{xu2025scsgc,
   title={Soft Graph Clustering for single-cell Sequencing Data},
   author={},
   journal={},
