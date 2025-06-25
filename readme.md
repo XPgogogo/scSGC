@@ -26,7 +26,8 @@ In scSGC, we first model the raw scRNA-seq data using a ZINB autoencoder to gene
 ```shell
 python train_scSGC.py --dataname 'Maayan_Mouse_Pancreas_cell_1' --num_class 13 --epochs 200 --foldername 'logger_folder' --gpu 0 --learning_rate 1e-3 --weight_decay 5e-3 --balancer 0.5 --factor_ort 20 --factor_KL 5e-3 --factor_corvar 1 --factor_zinb 20 --highly_genes 1500
 ```
-Here, we give the hyperparameters used for the Maayan_Human_Pancreas_cell_1 dataset. The hyperparameters for the rest of the datasets are found in the file train_scSGC.py.
+Here, we give the hyperparameters used for the Maayan_Mouse_Pancreas_cell_1 dataset. The hyperparameters for the rest of the datasets are found in the file train_scSGC.py.
+
 
 If you want to replicate our experimental results, please use the hyperparameters we provided.
 
@@ -56,9 +57,9 @@ Please note that if using different versions, the results reported in our paper 
 Setting data_file to the destination to the data (stored in h5 format, with two components X and Y, where X is the cell by gene count matrix and Y is the true labels), n_clusters to the number of clusters.
 
 In order to ensure the accuracy of the experimental results, we conducted more than 10 times runs on all the datasets and reported the mean and variance of these running results, reducing the result bias caused by randomness and variability, so as to obtain more reliable and stable results. Hyperparameter settings for all datasets can be found in the code.
-The final output reports the clustering performance, here is an example on Maayan_Human_Pancreas_cell_1 scRNA-seq data:
+The final output reports the clustering performance, here is an example on Maayan_Mouse_Pancreas_cell_1 scRNA-seq data:
 
-Final: ACC= 0.9625, NMI= 0.9142, ARI= 0.9489
+Final: ACC == 0.9100, NMI == 0.8567, ARI == 0.9231.
 
 The raw data used in this paper can be found:https://github.com/XPgogogo/scSGC/tree/master/datasets
 
