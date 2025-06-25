@@ -62,6 +62,8 @@ if __name__ == "__main__":
     parser.add_argument('--factor_corvar', default=0.05, type=float)
     parser.add_argument('--factor_zinb', default=0.1, type=float)
     parser.add_argument('--highly_genes', default = 1500, type=int)
+    parser.add_argument('--learning_rate',default=1e-3,type=float)
+    parser.add_argument('--weight_decay',default=5e-4,type=float) 
     
 
     parser.add_argument('--pretrain_model_save_path', default='pkl', type=str)
