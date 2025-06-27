@@ -10,10 +10,13 @@ scSGC, a clustering model based on dual-channel cut-informed soft graph for scRN
 # Overview
 Clustering analysis plays a key role in single-cell RNA sequencing (scRNA-seq) data analysis for elucidating cellular heterogeneity and diversity. Recent graph-based scRNA-seq clustering methods, particularly graph neural networks (GNNs), have significantly improved in tackling the challenges of high-dimension, high-sparsity, and frequent dropout events that lead to ambiguous cell population boundaries. However, the GNN-based method is intended for general graph encoding and faces challenges when applied to scRNA-seq data due to the following reasons: (i) GNN-based methods typically construct hard graphs from similarity matrices by applying a threshold that overly simplifies intercellular relationships into binary edges (0 or 1), which restricts the capture of continuous similarity features among cells and leads to significant information loss. (ii) Hard graphs derived from scRNA-seq data, which often exhibit significant inter-cluster connections, present challenges for GNN-based methods that rely heavily on underlying graph structures and typically generate similar representations for neighboring nodes, thereby leading to erroneous message propagation and biased clustering outcomes. 
 To address these issues, scSGC introduces a Soft Graph Clustering framework composed of three key modules:(i) A ZINB-based feature autoencoder to effectively model scRNA-seq data distributions and mitigate challenges of high sparsity and dropout events;(ii) a dual-channel cut-informed soft graph embedding module, which captures continuous intercellular similarities while preserving global and local graph structures;(iii) an optimal transport-based clustering optimization module, ensuring accurate clustering with high biological relevance. 
-Extensive experiments across 8 datasets demonstrate that scSGC significantly outperforms 11 state-of-the-art clustering models in terms of clustering accuracy, cell type annotation, and computational efficiency, highlighting its substantial potential to enhance scRNA-seq data analysis and advance understanding of cellular heterogeneity.
+Extensive experiments across 10 datasets demonstrate that scSGC significantly outperforms 13 state-of-the-art clustering models in terms of clustering accuracy, cell type annotation, and computational efficiency, highlighting its substantial potential to enhance scRNA-seq data analysis and advance understanding of cellular heterogeneity.
 In summary, scSGC represents a major enhancement over existing methods, addressing critical challenges in scRNA-seq clustering while expanding on our earlier work.
 
-![Alt text](scSGC/figure/Overview.png)
+![image](https://github.com/user-attachments/assets/8c9f7e1c-4f7d-4e0c-afeb-20aba86f97a6)
+
+![image](https://github.com/user-attachments/assets/fe823a5c-7a49-4b57-9f81-15d52582b0a4)
+
 
 Fig.1(a) depicts a hard graph GNN-based framework for scRNA-seq clustering, while Fig.1(b) illustrates the framework of our proposed method, scSGC.
 In contrast, scSGC offers two key advantages: (i) It tightly integrates two key modules within the graph-based scRNA-seq clustering framework, i.e., the feature autoencoder and the graph autoencoder, allowing both modules to optimize the final embedding collaboratively; (ii) By employing a soft graph construction strategy, it eliminates reliance on hard graph structures, enabling more effective capture of intracellular structural information and fully utilizing continuous similarities between cells.
@@ -35,6 +38,7 @@ Please contact us if you encounter problems during the replication process.
 
 # Requirements
 We implement scSGC in Python 3.7 based on PyTorch (version 1.12+cu113).
+All required dependencies have been carefully summarized and are now included in the requirements.txt file. Users can simply run the following command to install all necessary packages: pip install -r requirements.txt
 
 ```shell
 Keras==2.4.3
@@ -62,8 +66,9 @@ The final output reports the clustering performance, here is an example on Maaya
 Final: ACC == 0.9100, NMI == 0.8567, ARI == 0.9231.
 
 The raw data used in this paper can be found:https://github.com/XPgogogo/scSGC/tree/master/datasets
+![image](https://github.com/user-attachments/assets/e28357a8-73fa-40da-95da-1d730fcd2867)
 
-![Alt text](scSGC/figure/Clustering_performances.png)
+
 
 # Please cite our paper if you use this code or or the dataset we provide in your own work:
 
