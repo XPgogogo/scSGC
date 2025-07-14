@@ -1,7 +1,5 @@
 # scSGC
-scSGC, a clustering model based on dual-channel cut-informed soft graph for scRNA-seq data. See details in our paper: " ini" published in XXXXXX（CCF-X）.
-（Accepted as a XXX paper for the research track at XXXXXX）
-
+scSGC, a clustering model based on dual-channel cut-informed soft graph for scRNA-seq data. See details in our paper: " Soft Graph Clustering for single-cell RNA Sequencing Data" published in BMC Bioinformatics.
 (arXiv: https:    )
 
 （DOI：      ）
